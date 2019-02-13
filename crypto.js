@@ -38,7 +38,9 @@ const iv = crypto.getRandomValues(new Uint8Array(16))
 const encrypt = await crypto.subtle.encrypt({ name: 'AES-GCM', iv: iv }, direvedKey, plainTextByes)
 const blob = new Blob([iv, new Uint8Array(encrypt)], { type: "application/octet-stream" })
 let fileReader = new FileReader();
-let arrayBufferNew, uint8ArrayNew
+fileReader.readAsArrayBuffer(blob)
+let arrayBufferNew
+let uint8ArrayNew
 fileReader.onload = function (event) {
     arrayBufferNew = event.target.result;
     uint8ArrayNew = new Uint8Array(arrayBufferNew)
